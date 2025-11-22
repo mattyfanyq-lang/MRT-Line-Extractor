@@ -37,3 +37,25 @@ The goal is to extract polylines representing train routes, store their coordina
 
 ---
 
+## 🖼 Visual Samples
+
+Extracting from original schematic:
+
+![Cleaned MRT schematic](mrt_clean.png)
+
+Detected Downtown Line segments:
+
+![Downtown Line only](downtown_line_only.png)
+
+Verification overlay:
+
+![Downtown Line overlay](downtown_overlay.png)
+
+---
+
+## 🚀 How to Run
+
+1. Place input map image inside `input/`.
+2. Run the extraction script:
+   ```bash
+   python extract_lines.py
