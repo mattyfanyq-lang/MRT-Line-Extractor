@@ -1,16 +1,15 @@
 # MRT Line Extraction Project
 
-This project experiments with converting schematic MRT maps into structured line data for use in an interactive web visualisation.  
-The goal is to extract polylines representing train routes, store their coordinates in JSON, and display them accurately in the browser.
+This project experiments with converting schematic MRT System Map into structured line data for use in an interactive web visualisation.  
+The final goal is to extract polylines representing train routes, store their coordinates in JSON, and render them in the browser.
 
 ---
 
 ## ✅ Purpose
 
 - Convert static MRT diagrams into machine-readable geometry.
-- Reduce manual tracing time for large rail networks.
 - Prepare data for browser-based mapping with MapLibre.
-- Allow future logic, such as route tracing or network analysis.
+- Allow future logic implementation
 
 ---
 
@@ -18,8 +17,8 @@ The goal is to extract polylines representing train routes, store their coordina
 
 1. **Pre-processing**
    - Clean the schematic image.
+   - Convert from .pdf to .png.
    - Convert to greyscale and threshold to black and white.
-   - Resize or deskew if required.
 
 2. **Line Extraction**
    - Detect edges using OpenCV.
@@ -28,11 +27,9 @@ The goal is to extract polylines representing train routes, store their coordina
    - Convert extracted lines into coordinate arrays.
 
 3. **Data Output**
-   - Store line coordinates in `mrt_lines.json`.
-   - Include metadata such as colour, station sequence, and line name.
+   - Store line coordinates in `downtown_line.json`.
 
 4. **Visualisation**
-   - Render extracted lines in MapLibre GL JS.
    - Overlay extracted result onto original schematic to verify alignment.
 
 ---
@@ -41,21 +38,15 @@ The goal is to extract polylines representing train routes, store their coordina
 
 Extracting from original schematic:
 
-![Cleaned MRT schematic](mrt_clean.png)
+<img src="mrt_clean.png" alt="Cleaned MRT schematic" width="300"/>
 
 Detected Downtown Line segments:
 
-![Downtown Line only](downtown_line_only.png)
+<img src="downtown_line_only.png" alt="Downtown Line only" width="300"/>
 
 Verification overlay:
 
-![Downtown Line overlay](downtown_overlay.png)
+<img src="downtown_overlay.png" alt="Downtown Line overlay" width="300"/>
+
 
 ---
-
-## 🚀 How to Run
-
-1. Place input map image inside `input/`.
-2. Run the extraction script:
-   ```bash
-   python extract_lines.py
