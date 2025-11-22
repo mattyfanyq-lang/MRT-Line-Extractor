@@ -38,15 +38,14 @@ The final goal is to extract polylines representing train routes, store their co
 
 Extracting from original schematic:
 
-<img src="mrt_clean.png" alt="Cleaned MRT schematic" width="300"/>
+![Cleaned MRT schematic](mrt_clean.png)
 
 Detected Downtown Line segments:
 
-<img src="downtown_line_only.png" alt="Downtown Line only" width="300"/>
+![Downtown Line only](downtown_line_only.png)
 
 Verification overlay:
 
-<img src="downtown_overlay.png" alt="Downtown Line overlay" width="300"/>
-
+![Downtown Line overlay](downtown_overlay.png)
 
 ---
