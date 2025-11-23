@@ -9,31 +9,24 @@ def main(argv):
     default_file = "mrt_clean.png"
     filename = argv[0] if len(argv) > 0 else default_file
 
-    # Load image in colour
     src = cv.imread(cv.samples.findFile(filename))
     if src is None:
         print("Error opening image!")
         print("Usage: extract_downtown_line.py [image_name -- default " + default_file + "]\n")
         return -1
 
-    # Record image size
     height, width = src.shape[:2]
 
-    # Convert to HSV for colour filtering
     hsv = cv.cvtColor(src, cv.COLOR_BGR2HSV)
 
-    # Downtown Line blue range — tune if needed
     lower_blue = np.array([95, 80, 60])
     upper_blue = np.array([130, 255, 255])
 
-    # Create mask and edges
     mask = cv.inRange(hsv, lower_blue, upper_blue)
     edges = cv.Canny(mask, 50, 200, None, 3)
 
-    # Canvas for visualisation
     result = np.copy(src)
 
-    # Hough transform
     linesP = cv.HoughLinesP(
         edges,
         1,
@@ -42,8 +35,6 @@ def main(argv):
         minLineLength=60,
         maxLineGap=15
     )
-
-    # JSON structure
     extracted = {
         "line_name": "Downtown Line",
         "image_width": width,
@@ -51,7 +42,6 @@ def main(argv):
         "segments": []
     }
 
-    # Save coordinates
     if linesP is not None:
         for seg in linesP:
             x1, y1, x2, y2 = seg[0]
@@ -63,7 +53,6 @@ def main(argv):
                 "y2": int(y2)
             })
 
-    # Write JSON
     with open("downtown_line.json", "w") as f:
         json.dump(extracted, f, indent=4)
 
