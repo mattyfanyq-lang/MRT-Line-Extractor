@@ -1,23 +1,33 @@
-## 🧠 Approach
+## Comparison of Extraction Methods
 
-1. **Pre-processing**
-   - Clean the schematic image.
-   - Convert from .pdf to .png.
-   - Convert to greyscale and threshold to black and white.
+### Method 1 — Morph + Hough
 
-2. **Line Extraction**
-   - Detect edges using OpenCV.
-   - Apply Hough line transforms to obtain `(ρ, θ)` representations.
-   - Filter and merge overlapping or repeated segments.
-   - Convert extracted lines into coordinate arrays.
+**Key characteristics**
+- Works on the raw HSV colour mask
+- Uses morphological closing and opening to smooth regions
+- Lower Hough thresholds and shorter minimum line length
+- Designed for extracting multiple MRT lines in one pass
 
-3. **Data Output**
-   - Store line coordinates in `downtown_line.json`.
-
-4. **Visualisation**
-   - Overlay extracted result onto original schematic to verify alignment.
+**Visual result**
+✅ High sensitivity  
+✅ Captures many short segments  
+❌ Produces dense, clustered and overlapping lines  
 
 ---
+
+### Method 2 — Optimised for Hough only
+
+**Key characteristics**
+- Uses Canny edge detection before Hough
+- No morphological smoothing, preserving thin boundaries
+- Higher Hough threshold and longer minimum line length
+- Tuned specifically for the Downtown Line
+
+**Visual result**
+✅ Crisp, thin, separated segments  
+✅ Cleaner geometry for mapping and JSON output  
+❌ May miss very small or faint fragments  
+
 
 ## 🖼 Visual Samples
 
