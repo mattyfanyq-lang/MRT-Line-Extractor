@@ -37,9 +37,13 @@ Higher Hough thresholds and longer minimum line length used, so shorter fragment
 
 ## Visual Samples
 
-### Original MRT Schematic
+### Overlay Demo
 <div align="center">
-  <img src="mrt_clean.png" alt="Original MRT Map" width="750"/>
+
+| Origanal MRT Schematic | Schematic + DTL(Version1) overlay|
+|-----------------|-----------------|
+| <img src="mrt_clean.png" alt="Origanal MRT Schematic" width="500"/> | <img src="dtl_overlay_v1.png" alt="Schematic + DTL(Version1) overlay" width="500"/> |
+
 </div>
 
 ---
