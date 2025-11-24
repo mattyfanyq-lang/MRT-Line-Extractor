@@ -37,17 +37,6 @@ Higher Hough thresholds and longer minimum line length used, so shorter fragment
 
 ## Visual Samples
 
-### Overlay Demo
-<div align="center">
-
-| Origanal MRT Schematic | Schematic + DTL(Version1) overlay|
-|-----------------|-----------------|
-| <img src="mrt_clean.png" alt="Origanal MRT Schematic" width="500"/> | <img src="dtl_overlay_v1.png" alt="Schematic + DTL(Version1) overlay" width="500"/> |
-
-</div>
-
----
-
 ### Downtown Line Extraction Comparison
 <div align="center">
 
@@ -59,8 +48,19 @@ Higher Hough thresholds and longer minimum line length used, so shorter fragment
 
 ---
 
-### Overlay for DTL - Version 1
+### Overlay Demo
 <div align="center">
-  <img src="dtl_overlay_v1.png" alt="DTL Overlay on Original Map" width="750"/>
+
+| Origanal MRT Schematic | Schematic + DTL(Version1) overlay|
+|-----------------|-----------------|
+| <img src="mrt_clean.png" alt="Origanal MRT Schematic" width="500"/> | <img src="dtl_overlay_v1.png" alt="Schematic + DTL(Version1) overlay" width="500"/> |
+
+</div>
+
+---
+
+### DTL + EWL Combined Line Visualisation — Version 2
+<div align="center">
+  <img src="combined_dtl_ewl.png" alt="Visualisation for EWL and DTLp" width="600"/>
 </div>
 
