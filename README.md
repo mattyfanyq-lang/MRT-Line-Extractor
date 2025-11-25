@@ -35,12 +35,12 @@ Higher Hough thresholds and longer minimum line length used, so shorter fragment
 
 ## Visual Samples
 
-### Colour Masking + Dilation
+### Binary Intermediate
 <div align="center">
 
-| Masked | Masked + Dilation |
+| Mask + Morph Dilation (Version 1) | Edge Detection (Version 2) |
 |-----------------|-----------------|
-| <img src="ewl_mask.png" alt="DTL Version 1" width="500"/> | <img src="ewl_cleaned_mask.png" alt="DTL Version 2" width="500"/> |
+| <img src="ewl_cleaned_mask.png" alt="DTL Version 1" width="500"/> | <img src="ewl_edges.png" alt="DTL Version 2" width="500"/> |
 
 </div>
 
