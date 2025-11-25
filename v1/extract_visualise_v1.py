@@ -3,11 +3,6 @@ import cv2
 import numpy as np
 import json
 
-
-# -----------------------------------------------------------
-# Improved line detection helper
-# -----------------------------------------------------------
-
 def detect_lines(mask):
     kernel = np.ones((3, 3), np.uint8)
 
@@ -17,7 +12,7 @@ def detect_lines(mask):
     # Opening to remove tiny isolated specks
     cleaned = cv2.morphologyEx(cleaned, cv2.MORPH_OPEN, kernel)
 
-    # More sensitive Hough settings
+    # Highly sensitive Hough settings
     lines = cv2.HoughLinesP(
         cleaned,
         rho=1,
@@ -28,11 +23,6 @@ def detect_lines(mask):
     )
 
     return lines, cleaned
-
-
-# -----------------------------------------------------------
-# Main extractor with all final fixes
-# -----------------------------------------------------------
 
 def main(argv):
 
@@ -55,17 +45,13 @@ def main(argv):
     # Initial mask
     mask = cv2.inRange(hsv, lower_green, upper_green)
 
-    # -------------------------------------------------------
-    # FIX 1: Dilation to strengthen curves and reconnect gaps
-    # -------------------------------------------------------
+    # Dilation to initial mask
     mask = cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=1)
 
-    # Run detection with improved Hough settings
+    # LINE DETECTION
     lines, cleaned_mask = detect_lines(mask)
 
-    # -------------------------------------------------------
-    # Prepare outputs
-    # -------------------------------------------------------
+    # Outputs
     white_canvas = np.ones_like(src) * 255
     overlay = src.copy()
 
@@ -84,7 +70,7 @@ def main(argv):
             cv2.line(white_canvas, (x1, y1), (x2, y2),
                      (0, 130, 0), 3, cv2.LINE_AA)
 
-            # Draw over original schematic (bright purple)
+            # Draw over original schematic
             cv2.line(overlay, (x1, y1), (x2, y2),
                      (255, 0, 255), 3, cv2.LINE_AA)
 
@@ -93,9 +79,7 @@ def main(argv):
                 "x2": int(x2), "y2": int(y2)
             })
 
-    # -------------------------------------------------------
-    # Save everything
-    # -------------------------------------------------------
+    # Save files
     with open("ewl_v1.json", "w") as f:
         json.dump(extracted, f, indent=4)
 
