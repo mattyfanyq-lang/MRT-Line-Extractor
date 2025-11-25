@@ -48,17 +48,12 @@ def main(argv):
 
     hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
 
-    # -------------------------------------------------------
-    # Improved purple range:
-    #  - includes faint curved purple strokes (lower V/S)
-    #  - excludes pink circular icons (H > 160)
-    # -------------------------------------------------------
-    lower_blue = np.array([100, 80, 40])
-    upper_blue = np.array([135, 255, 255])
+    lower_green = np.array([45, 60, 40])
+    upper_green = np.array([85, 255, 255])
 
 
     # Initial mask
-    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+    mask = cv2.inRange(hsv, lower_green, upper_green)
 
     # -------------------------------------------------------
     # FIX 1: Dilation to strengthen curves and reconnect gaps
@@ -85,9 +80,9 @@ def main(argv):
         for seg in lines:
             x1, y1, x2, y2 = seg[0]
 
-            # Draw onto white canvas (blue stroke)
+            # Draw onto white canvas
             cv2.line(white_canvas, (x1, y1), (x2, y2),
-                     (255, 0, 0), 3, cv2.LINE_AA)
+                     (0, 130, 0), 3, cv2.LINE_AA)
 
             # Draw over original schematic (bright purple)
             cv2.line(overlay, (x1, y1), (x2, y2),
@@ -101,17 +96,17 @@ def main(argv):
     # -------------------------------------------------------
     # Save everything
     # -------------------------------------------------------
-    with open("dtl_v1.1.json", "w") as f:
+    with open("ewl_v1.json", "w") as f:
         json.dump(extracted, f, indent=4)
 
-    cv2.imwrite("dtl_lines_white.png", white_canvas)
-    cv2.imwrite("dtl_overlay.png", overlay)
-    cv2.imwrite("dtl_mask.png", mask)
-    cv2.imwrite("dtl_cleaned_mask.png", cleaned_mask)
+    cv2.imwrite("ewl_lines_white.png", white_canvas)
+    cv2.imwrite("ewl_overlay.png", overlay)
+    cv2.imwrite("ewl_mask.png", mask)
+    cv2.imwrite("ewl_cleaned_mask.png", cleaned_mask)
 
-    print("Saved files:")
+    print("Saved files")
 
-    cv2.imshow("DTL Overlay", overlay)
+    cv2.imshow("EWL Overlay", overlay)
     cv2.waitKey()
 
     return 0
