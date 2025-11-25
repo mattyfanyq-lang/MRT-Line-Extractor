@@ -4,17 +4,15 @@
 
 **Key characteristics**
 
-Version 1 takes the raw colour mask and applies morphological closing and opening. 
-This expands the blue Downtown Line, fills tiny gaps, and reconnects broken parts. 
-The line becomes thicker in pixel terms, so the Hough transform receives a large, continuous region of blue pixels. 
-As a result, it detects many similar line segments stacked on top of one another, which makes the output look clustered and visually busy.
-Lower Hough thresholds and shorter minimum line lengths are used, which encourages extra detections.
+Version 1 starts by masking the target line’s colour, then applies closing, opening, and morphological dilation to smooth gaps and strengthen thin regions. 
+The cleaned mask gives the Hough transform a clear and continuous shape to analyse, picking up small angled pieces and faint curves more reliably. 
+The result is a dense set of short, accurate (but sometimes overlapping) segments that align closely with the schematic.
 
 **Visual result**
 
-✅ High sensitivity  
-✅ Captures many short segments  
-❌ Produces dense, clustered and overlapping lines  
+- ✅ Very high sensitivity with strong coverage.
+- ✅ Detects many short segments, including faint or curved areas.
+- ❌ Generates a large number of line segments, increasing data size and making the output heavier to process.
 
 ---
 
@@ -30,19 +28,30 @@ Higher Hough thresholds and longer minimum line length used, so shorter fragment
 
 **Visual result**
 
-✅ Crisp, thin, separated segments  
-✅ Cleaner geometry for mapping and JSON output  
-❌ May miss very small or faint fragments  
+- ❌ Fewer segments, reduced coverage
+- ❌ Curved sections break down into gaps or disappear entirely
+- ✅ Straighter portions look clean, but overall geometry loses fidelity
 
 
 ## Visual Samples
 
-### Downtown Line Extraction Comparison
+### Colour Masking + Dilation
 <div align="center">
 
-| DTL — Version 1 | DTL — Version 2 |
+| Masked | Masked + Dilation |
 |-----------------|-----------------|
-| <img src="dtl_v1.png" alt="DTL Version 1" width="500"/> | <img src="dtl_v2.png" alt="DTL Version 2" width="500"/> |
+| <img src="ewl_mask.png" alt="DTL Version 1" width="500"/> | <img src="ewl_cleaned_mask.png" alt="DTL Version 2" width="500"/> |
+
+</div>
+
+---
+
+### Line Extraction Comparison (DTL + EWL)
+<div align="center">
+
+| Version 1 | Version 2 |
+|-----------------|-----------------|
+| <img src="combined_v1.png" alt="DTL Version 1" width="500"/> | <img src="combined_v2.png" alt="DTL Version 2" width="500"/> |
 
 </div>
 
@@ -51,16 +60,10 @@ Higher Hough thresholds and longer minimum line length used, so shorter fragment
 ### Overlay Demo
 <div align="center">
 
-| Origanal MRT Schematic | Schematic + DTL(Version1) overlay|
+| Original MRT System Map | DTL(Version1) overlay |
 |-----------------|-----------------|
 | <img src="mrt_clean.png" alt="Origanal MRT Schematic" width="500"/> | <img src="dtl_overlay_v1.png" alt="Schematic + DTL(Version1) overlay" width="500"/> |
 
 </div>
 
 ---
-
-### DTL + EWL Combined Line Visualisation — Version 2
-<div align="center">
-  <img src="combined_dtl_ewl.png" alt="Visualisation for EWL and DTLp" width="600"/>
-</div>
-
