@@ -22,10 +22,10 @@ def main(argv):
     upper_green = np.array([80, 255, 255])
     mask = cv.inRange(hsv, lower_green, upper_green)
 
-    # Edge detection result
+    # Edge detection
     edges = cv.Canny(mask, 50, 200, None, 3)
 
-    # --- NEW: Create a black canvas and draw edges in white ---
+    # Binary image render
     edge_visual = np.zeros((height, width, 3), dtype=np.uint8)
     edge_visual[edges > 0] = (255, 255, 255)    # white edges on black
 
@@ -33,10 +33,7 @@ def main(argv):
     cv.imwrite("ewl_edges.png", edge_visual)
     print("Saved edge visualisation as ewl_edges.png")
 
-    # ------------------------------
     # Hough transform + JSON export
-    # ------------------------------
-
     linesP = cv.HoughLinesP(
         edges,
         1,

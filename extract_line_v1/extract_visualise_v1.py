@@ -12,14 +12,14 @@ def detect_lines(mask):
     # Opening to remove tiny isolated specks
     cleaned = cv2.morphologyEx(cleaned, cv2.MORPH_OPEN, kernel)
 
-    # Highly sensitive Hough settings
+    # Hough settings
     lines = cv2.HoughLinesP(
         cleaned,
         rho=1,
         theta=np.pi/180,
-        threshold=20,       # Lower threshold for sensitivity
-        minLineLength=10,   # Detect very small segments
-        maxLineGap=20       # Slightly larger gap allowance
+        threshold=20,       
+        minLineLength=10,   
+        maxLineGap=20       
     )
 
     return lines, cleaned
@@ -48,7 +48,7 @@ def main(argv):
     # Dilation to initial mask
     mask = cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=1)
 
-    # LINE DETECTION
+    # Line Detection
     lines, cleaned_mask = detect_lines(mask)
 
     # Outputs
